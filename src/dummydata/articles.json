@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Med Article 3",
+        "date_prescribed": 1685938886255,
+        "unread": false,
+        "id": 3,
+        "text": "Lorem ipsum 3",
+        "image": "https://images.unsplash.com/photo-1581594294883-5109c202942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80"    
+    },
+    {
+        "title": "Med Article 1",
+        "date_prescribed": 1685938868874,
+        "unread": false,
+        "id": 1,
+        "text": "Lorem ipsum 1",
+        "image": "https://images.unsplash.com/photo-1602520628350-fbf9db1f02ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
+    },
+    {
+        "title": "Small Cell Lung Cancer Treatment (PDQ) – Patient Version",
+        "date_prescribed": 1685938877391,
+        "unread": true,
+        "id": 2,
+        "text": "Lorem ipsum 2",
+        "image": "https://images.unsplash.com/photo-1581594294883-5109c202942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80"
+    }
+]

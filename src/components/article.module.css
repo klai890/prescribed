@@ -1,0 +1,31 @@
+.thumbnail {
+    text-align: center;
+    margin-bottom: 50px;
+    border-radius: 12px;
+    display: block;
+    background: #039F96;
+}
+
+.imageContainer {
+    width: 100%;
+    max-height: 80px;
+    overflow: hidden;
+    display: inline-block;
+
+}
+
+.thumbnail img {
+    margin: 0;
+    width: 100%;
+    border-radius: 12px;
+    display: block;
+}
+
+.title {
+    background: #039F96;
+    margin: 0;
+    font-size: medium;
+    padding: 12px;
+    display:absolute;
+    border-radius: 12px;
+}
