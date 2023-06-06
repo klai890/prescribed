@@ -6,6 +6,7 @@
 
     .mainContainer {
         height: 100%;
+        max-height: 100%;
         padding: 2.5%;
         display: flex;
         flex-direction: column;
@@ -15,27 +16,25 @@
 
     .mainPanel {
         height: 100%;
+        max-height: 100%;
         border-radius: 12px;
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 20px;
     }
-
-    .rightPanel {
-        color: #EBF6F5;
-        max-width: 100%;
-        max-height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;  
-    }
-
-    .leftPanel {
+    
+    .leftPanel, .rightPanel {
         align-items: center;
         background: linear-gradient(to bottom right, rgb(172, 208, 207, 0.7), rgba(43, 100, 100, 0.33));
         border-radius: 12px;
         text-align: center;
-        padding: 1rem;
+        color: white;
+        overflow: hidden;
+    }
+    
+    .rightPanel {
+        overflow:scroll;
+        background: none;
     }
 
     .column {
@@ -56,6 +55,37 @@
     .topSection {
         padding: 1rem;
     }
+
+
+    .doctorSection, .resourceSection { 
+        padding: 2rem 5rem;
+        background: linear-gradient(to bottom right, rgb(172, 208, 207, 0.7), rgba(43, 100, 100, 0.33));
+        border-radius: 12px;
+        line-height: 1.3rem;
+        max-height: 100%;
+    }
+
+    .doctorSection {
+        max-height: 15%;
+        height: 15%;
+    }
+
+    .resourceSection {
+        margin-top: 1rem;
+        max-height: 70%;
+        height: 70%;
+        overflow: scroll;
+    }
+
+    .doctorSection > p, .resourceSection > p{
+        text-align: left;
+    }
+
+    
+    .resourceHeader {
+        border-bottom: 1px solid white;
+        padding-bottom: 2rem;
+    }
   
     /* Main content container in left panel – nav bar and article search. */
   .bottomSection {
@@ -74,24 +104,48 @@
   
   .whiteButton {
     position: absolute;
-    top: 50%;
-    right: 10px; /* Adjust the button's position as needed */
+    top: 10%;
+    right:0px; /* Adjust the button's position as needed */
     transform: translateY(-50%);
     background-color: #fff;
-    color: #000;
+    color: #2B5B5B;
     padding: 0;
     border: none;
     cursor: pointer;
-    width: 100px;
+    width: 125px;
+    text-align: center;
+    font-weight: normal;
+    font-size: 16px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 90px;
+    justify-content: center;
   }
+    
+  .resourceButton{
+    background-color: #fff;
+    color: #2B5B5B;
+    padding:12px;
+    width: 50%;
+    border: none;
+    cursor: pointer;
+    border-radius: 100px;
+    margin: 1rem 0;
+    font-weight: normal;
+  }
+
+  /* Override link styles. */
+  .resourceButton a{
+    display: block;
+    color: #2B5B5B;
+    text-decoration: none;
+  }
+
   
   .gap {
     height: 1px;
     background-color: transparent;
-  }
-
-  .articleContainer{
-
   }
 
   .articleButton{ 
@@ -102,6 +156,10 @@
     color: black;
     width: 100%;
     height: 100%;
+  }
+
+  .resourceButton:hover, .whiteButton:hover {
+    background: #ddd;
   }
 
   .articleButton:hover {
@@ -137,11 +195,6 @@
 
   .unreadContainer > .readStatus {
     color: #075E5E;
-  }
-
-
-  .article {
-
   }
 
   .thumbnail {

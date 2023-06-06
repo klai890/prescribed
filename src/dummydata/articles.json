@@ -4,7 +4,9 @@
         "date_prescribed": 1685938886255,
         "unread": false,
         "id": 3,
-        "text": "Lorem ipsum 3",
+        "doctor_note": "Hello World 3",
+        "link": "https://google.com",
+        "text": "Lorem ipsum 3: Lorem ipsum dolor sit amet consectetur. At nulla nam iaculis dolor aliquam in. Dictumst risus pellentesque adipiscing volutpat enim volutpat porttitor id. Lorem ipsum dolor sit amet consectetur. At nulla nam iaculis dolor aliquam in. Dictumst risus pellentesque adipiscing volutpat enim volutpat porttitor id. Lorem ipsum dolor sit amet consectetur. At nulla nam iaculis dolor aliquam in. Dictumst risus pellentesque adipiscing volutpat enim volutpat porttitor id. Lorem ipsum dolor sit amet consectetur. At nulla nam iaculis dolor aliquam in. Dictumst risus pellentesque adipiscing volutpat enim volutpat porttitor id. Lorem ipsum dolor sit amet consectetur. At nulla nam iaculis dolor aliquam in. Dictumst risus pellentesque adipiscing volutpat enim volutpat porttitor id. Lorem ipsum dolor sit amet consectetur. At nulla nam iaculis dolor aliquam in. Dictumst risus pellentesque adipiscing volutpat enim volutpat porttitor id. Lorem ipsum dolor sit amet consectetur. At nulla nam iaculis dolor aliquam in. Dictumst risus pellentesque adipiscing volutpat enim volutpat porttitor id.Lorem ipsum dolor sit amet consectetur. At nulla nam iaculis dolor aliquam in. Dictumst risus pellentesque adipiscing volutpat enim volutpat porttitor id.Lorem ipsum dolor sit amet consectetur. At nulla nam iaculis dolor aliquam in. Dictumst risus pellentesque adipiscing volutpat enim volutpat porttitor id.Lorem ipsum dolor sit amet consectetur. At nulla nam iaculis dolor aliquam in. Dictumst risus pellentesque adipiscing volutpat enim volutpat porttitor id.Lorem ipsum dolor sit amet consectetur. At nulla nam iaculis dolor aliquam in. Dictumst risus pellentesque adipiscing volutpat enim volutpat porttitor id.Lorem ipsum dolor sit amet consectetur. At nulla nam iaculis dolor aliquam in. Dictumst risus pellentesque adipiscing volutpat enim volutpat porttitor id.",
         "image": "https://images.unsplash.com/photo-1581594294883-5109c202942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80"    
     },
     {
@@ -12,7 +14,9 @@
         "date_prescribed": 1685938868874,
         "unread": false,
         "id": 1,
-        "text": "Lorem ipsum 1",
+        "doctor_note": "Hello World 2",
+        "link": "https://google.com",
+        "text": "Lorem ipsum 1: Lorem ipsum dolor sit amet consectetur. At nulla nam iaculis dolor aliquam in. Dictumst risus pellentesque adipiscing volutpat enim volutpat porttitor id.",
         "image": "https://images.unsplash.com/photo-1602520628350-fbf9db1f02ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
     },
     {
@@ -20,7 +24,9 @@
         "date_prescribed": 1685938877391,
         "unread": true,
         "id": 2,
-        "text": "Lorem ipsum 2",
+        "doctor_note": "Hello World 1",
+        "link": "https://google.com",
+        "text": "Lorem ipsum 2: Lorem ipsum dolor sit amet consectetur. At nulla nam iaculis dolor aliquam in. Dictumst risus pellentesque adipiscing volutpat enim volutpat porttitor id.",
         "image": "https://images.unsplash.com/photo-1581594294883-5109c202942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80"
     }
 ]

@@ -9,7 +9,9 @@ import logo from '../images/logo-light.svg'
 import styles from './prescriptions.module.css'
 import Nav from '../components/nav'
 import articles from '../dummydata/articles.json'
-import Article from '../components/article'
+import resourceIcon from '../images/resource.svg'
+import external from '../images/external.svg'
+import chevron from '../images/chevron.svg'
 
 function sortByDate (a1, a2) {
     var d1 = new Date(a1['date_prescribed'])
@@ -21,16 +23,17 @@ function sortByDate (a1, a2) {
 const Prescriptions = () => {
 
     const [info, setInfo] = useState(null);
+    const [note, setNote] = useState(null);
+    const [link, setLink] = useState(null);
 
     const unread = articles.filter (article => article.unread)
     const read = articles.filter (article => !article.unread)
-    console.log(read);
-    read.sort(sortByDate)
-    console.log(read);
 
     const retrieveInfo = (article_id) => {
         var article = articles.filter(a => a.id == article_id)[0];
         setInfo(article['text'])
+        setNote(article['doctor_note'])
+        setLink(article['link'])
     }
     
     const processUnread = (e) => {
@@ -41,6 +44,10 @@ const Prescriptions = () => {
     const updateInfo = (e) => {
         var article_id = e.target.id;
         retrieveInfo(article_id);
+    }
+
+    const toggleDoctorPanel = () => {
+
     }
 
   return (
@@ -102,16 +109,30 @@ const Prescriptions = () => {
           </div>
 
             <div className={styles.rightPanel}>
-                <button class={styles.whiteButton}>Button</button>
 
                 {
                     (info == null) ? (<h1>Select a Prescription</h1>) : 
-
+                    
                     <>
                         {/* Doctor's Note Section */}
+                        <div className={`${styles.topSection} ${styles.doctorSection}`}>
+                            <h1>Doctor's Note</h1>
+                            <p>{note}</p>
+                            <button class={styles.whiteButton} onClick={toggleDoctorPanel()}>
+                                <img src={chevron} /><span>DOCTOR</span>
+                            </button>
+                        </div>
 
                         {/* Resource Name Section */}
-                        <p>{info}</p>
+                        <div className={styles.resourceSection}>
+                            <img src={resourceIcon} />
+                            <h1 className={styles.resourceHeader}>Resource Name</h1>
+                            <p>{info}</p>
+                            <button className={styles.resourceButton}>
+                                
+                                <a href={link} target="_blank">View Full Resource <img src={external} /></a>
+                            </button>
+                        </div>
                     </>
 
                 }
