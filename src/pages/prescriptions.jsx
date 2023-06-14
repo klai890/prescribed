@@ -12,6 +12,7 @@ import articles from '../dummydata/articles.json'
 import resourceIcon from '../images/resource.svg'
 import external from '../images/external.svg'
 import chevron from '../images/chevron.svg'
+import DoctorInfo from '../components/doctor_info'
 
 function sortByDate (a1, a2) {
     var d1 = new Date(a1['date_prescribed'])
@@ -25,6 +26,9 @@ const Prescriptions = () => {
     const [info, setInfo] = useState(null);
     const [note, setNote] = useState(null);
     const [link, setLink] = useState(null);
+    const [articleId, setArticleId] = useState(null);
+    const [doctorId, setDoctorId] = useState(null);
+    const [doctor, setDoctor] = useState(false); // show doctor panel
 
     const unread = articles.filter (article => article.unread)
     const read = articles.filter (article => !article.unread)
@@ -34,10 +38,12 @@ const Prescriptions = () => {
         setInfo(article['text'])
         setNote(article['doctor_note'])
         setLink(article['link'])
+        setDoctorId(article['doctor_id'])
     }
     
     const processUnread = (e) => {
         var article_id = e.target.id;
+        setArticleId(article_id)
         retrieveInfo(article_id);
     }
 
@@ -46,8 +52,8 @@ const Prescriptions = () => {
         retrieveInfo(article_id);
     }
 
-    const toggleDoctorPanel = () => {
-
+    const toggleDoctorPanel = (e) => {
+        setDoctor(!doctor);
     }
 
   return (
@@ -111,14 +117,18 @@ const Prescriptions = () => {
             <div className={styles.rightPanel}>
 
                 {
-                    (info == null) ? (<h1>Select a Prescription</h1>) : 
+                    (info == null) ? (<h1>Select a Prescription</h1>) 
+                    
+                    : 
+
+                    (doctor != true) ?
                     
                     <>
                         {/* Doctor's Note Section */}
                         <div className={`${styles.topSection} ${styles.doctorSection}`}>
                             <h1>Doctor's Note</h1>
                             <p>{note}</p>
-                            <button class={styles.whiteButton} onClick={toggleDoctorPanel()}>
+                            <button class={styles.whiteButton} onClick={(e) => toggleDoctorPanel()}>
                                 <img src={chevron} /><span>DOCTOR</span>
                             </button>
                         </div>
@@ -129,10 +139,19 @@ const Prescriptions = () => {
                             <h1 className={styles.resourceHeader}>Resource Name</h1>
                             <p>{info}</p>
                             <button className={styles.resourceButton}>
-                                
                                 <a href={link} target="_blank">View Full Resource <img src={external} /></a>
                             </button>
                         </div>
+                    </>
+
+                    : 
+
+                    <>
+                        {/* Show doctor panel */}
+                        <button className={styles.backButton} onClick={(e) => toggleDoctorPanel()}>
+                            <img src={chevron} /><span>BACK</span>
+                        </button>
+                        <DoctorInfo id={doctorId} />
                     </>
 
                 }

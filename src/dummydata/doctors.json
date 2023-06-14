@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "name": "Potter",
+        "diseases": ["lung cancer", "small cell lung cancer", "different variant"],
+        "field": "theatric cancer",
+        "about": "Lorem ipsum dolor sit amet consectetur. At nulla nam iaculis dolor aliquam in. Dictumst risus pellentesque adipiscing volutpat enim volutpat porttitor id.",
+        "image": "https://images.unsplash.com/photo-1622253694238-3b22139576c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80"
+    },
+    {
+        "id": 2,
+        "name": "Mann",
+        "diseases": ["lung cancer", "small cell lung cancer", "different variant"],
+        "field": "hallucinations",
+        "about": "Lorem ipsum dolor sit amet consectetur. At nulla nam iaculis dolor aliquam in. Dictumst risus pellentesque adipiscing volutpat enim volutpat porttitor id.",
+        "image": "https://images.unsplash.com/photo-1622253694238-3b22139576c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80"
+    }
+]

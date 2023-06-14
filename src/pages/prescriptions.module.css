@@ -102,7 +102,7 @@
     height: calc(33.33% - 1px);
   }
   
-  .whiteButton {
+  .whiteButton, .backButton {
     position: absolute;
     top: 10%;
     right:0px; /* Adjust the button's position as needed */
@@ -112,16 +112,21 @@
     padding: 0;
     border: none;
     cursor: pointer;
-    width: 125px;
+    max-width: 125px;
     text-align: center;
     font-weight: normal;
     font-size: 16px;
-    padding: 10px;
+    padding: 8px;
     display: flex;
     align-items: center;
     border-radius: 90px;
     justify-content: center;
-  }
+}
+
+.backButton {
+    box-shadow: 2px 2px 2px 2px black;
+
+}
     
   .resourceButton{
     background-color: #fff;

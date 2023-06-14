@@ -9,6 +9,7 @@ import {
 
 import Login from './pages/login';
 import Prescriptions from './pages/prescriptions';
+import Doctors from './pages/doctors';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Login/>} />
           <Route exact path="/prescriptions" element={<Prescriptions/>} />
+          <Route exact path="/doctors" element={<Doctors/>} />
         </Routes>
     </Router>
   );

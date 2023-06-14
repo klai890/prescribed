@@ -1,0 +1,47 @@
+.doctorContainer {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.26);
+    margin: 1rem 0;
+    border-radius: 20px;
+
+    color: #075E5E;
+    text-transform: capitalize;
+    
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.notSelected:hover {
+    background: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+}
+
+.selected {
+    background: rgb(235, 246, 245);
+}
+
+.headers {
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 10px;
+}
+
+.byline {
+    font-weight: 500;
+    font-size: 24px;
+}
+
+
+.doctorImg {
+    width: 120px;
+    height: 120px;
+    border-radius: 100px;
+    overflow: hidden;
+    margin-right: 20px;
+}
+
+.doctorImg img {
+    width: 120px;
+}
+
