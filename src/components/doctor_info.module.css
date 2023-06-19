@@ -5,6 +5,7 @@
     display: grid;
     grid-template-rows: 1fr 1fr 2fr;
     background: linear-gradient(to bottom, #fff 0 40%, #075E5E 0 50%, #6ECCC1 100%);
+    color: white;
 }
 
 .top, .middle, .bottom {
@@ -163,10 +164,6 @@ display: grid;
 grid-template-columns: 1.2fr 2fr;
 }
 
-.container {
-border: 1px solid black;
-}
-
 .topPanel {
 position: relative;
 height: calc(33.33% - 1px);
@@ -212,69 +209,67 @@ font-weight: normal;
 
 /* Override link styles. */
 .resourceButton a{
-display: block;
-color: #2B5B5B;
-text-decoration: none;
+    display: block;
+    color: #2B5B5B;
+    text-decoration: none;
 }
 
 
 .gap {
-height: 1px;
-background-color: transparent;
+    height: 1px;
+    background-color: transparent;
+}
+
+.article {
+    border-bottom: 2px solid white;
+    padding: 1rem 0;
 }
 
 .articleButton{ 
-padding: 0;
-margin: 0;
-background: 0;
-border: none;
-color: black;
-width: 100%;
-height: 100%;
-}
-
-.resourceButton:hover, .whiteButton:hover {
-background: #ddd;
-}
-
-.articleButton:hover {
-background: none;
-}
-
-.unreadContainer, .readContainer {
-padding: 0.2px 12px;
-border-radius: 12px;
-background: white;
-max-height: 225px; /* to be adjusted */
-overflow: scroll;
-display: flex;
-flex-direction: column;
-align-items: center;
-}
-
-.unreadContainer {
-margin-bottom: 1rem;
+    padding: 0;
+    margin: 0;
+    background: 0;
+    border: none;
+    color: white;
+    height: 100%;
+    padding-bottom: 10px;
+    border-radius: 0;
 }
 
 .thumbnail {
-text-align: center;
-margin-bottom: 50px;
-border-radius: 12px;
-display: block;
-background: #039F96;
+    height: 200px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    border-radius: 12px;
+    background: #039F96;
+    display: flex;
+    flex-direction: column;
 }
 
-.imageContainer {
-width: 100%;
-max-height: 80px;
-overflow: hidden;
-display: inline-block;
+.date {
+    text-align: left;
+}
 
+
+.imageContainer {
+    width: 100%;
+    max-height: 80%;
+    overflow: hidden;
+    display: inline-block;
 }
 
 .thumbnail img {
-margin: 0;
-width: 100%;
-border-radius: 12px;
-display: block;
+    margin: 0;
+    width: 100%;
+    border-radius: 12px;
+    display: block;
+}
+
+.resourceButton:hover, .whiteButton:hover {
+    background: #ddd;
+}
+
+.articleButton:hover {
+    background: none;
 }

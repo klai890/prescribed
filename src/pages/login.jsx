@@ -27,6 +27,8 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Connec tto database.
+
     // Add login functionality
     console.log('Login form submitted');
     console.log('Username:', username);

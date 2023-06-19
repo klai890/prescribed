@@ -13,6 +13,8 @@ import resourceIcon from '../images/resource.svg'
 import external from '../images/external.svg'
 import chevron from '../images/chevron.svg'
 import DoctorInfo from '../components/doctor_info'
+import Chat from '../components/chat'
+import cross from '../images/cross.svg'
 
 function sortByDate (a1, a2) {
     var d1 = new Date(a1['date_prescribed'])
@@ -26,9 +28,10 @@ const Prescriptions = () => {
     const [info, setInfo] = useState(null);
     const [note, setNote] = useState(null);
     const [link, setLink] = useState(null);
-    const [articleId, setArticleId] = useState(null);
     const [doctorId, setDoctorId] = useState(null);
+    const [viewArticle, setViewArticle] = useState(false);
     const [doctor, setDoctor] = useState(false); // show doctor panel
+    const [articleId, setArticleId] = useState(null); // show article panel
 
     const unread = articles.filter (article => article.unread)
     const read = articles.filter (article => !article.unread)
@@ -56,13 +59,19 @@ const Prescriptions = () => {
         setDoctor(!doctor);
     }
 
+    const toggleArticlePanel = (e) => {
+        if (articleId != null) setViewArticle(!viewArticle);
+    }
+
   return (
     <div className={styles.main}>
         <div className={styles.mainContainer}>
+
+          { 
+          (viewArticle == false) ? 
+
           <div className={styles.mainPanel}>     
             <div class={styles.leftPanel}>
-
-
                 {/* Left panel top section = Prescribed logo */}
                 <div class={styles.topSection}>
                     <img src={logo} />
@@ -121,7 +130,8 @@ const Prescriptions = () => {
                     
                     : 
 
-                    (doctor != true) ?
+                    // Doctor panel not toggled.
+                    (doctor == false) ?
                     
                     <>
                         {/* Doctor's Note Section */}
@@ -138,14 +148,15 @@ const Prescriptions = () => {
                             <img src={resourceIcon} />
                             <h1 className={styles.resourceHeader}>Resource Name</h1>
                             <p>{info}</p>
-                            <button className={styles.resourceButton}>
-                                <a href={link} target="_blank">View Full Resource <img src={external} /></a>
+                            <button className={styles.resourceButton} onClick={() => toggleArticlePanel()}>
+                                View Full Resource <img src={external}></img>
                             </button>
                         </div>
                     </>
 
-                    : 
+                    :
 
+                    // Doctor panel toggled.
                     <>
                         {/* Show doctor panel */}
                         <button className={styles.backButton} onClick={(e) => toggleDoctorPanel()}>
@@ -156,8 +167,15 @@ const Prescriptions = () => {
 
                 }
             </div>
-
           </div>
+
+          :
+          // Show Article
+          <div className={styles.chatContainer}>
+            <button className={styles.exitButton} onClick={(e) => toggleArticlePanel()}><img src={cross} /></button>
+            <Chat articleId={articleId}/>
+          </div>
+        }
         </div>
 
     </div>

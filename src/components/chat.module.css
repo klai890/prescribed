@@ -1,0 +1,100 @@
+.container {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    color: white;
+}
+
+.articlePanel, .chatPanel {
+    border-radius: 12px;
+}
+
+.chatPanel {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3rem;
+    background: #6ECCC1
+}
+
+.aiHeader {
+    vertical-align: center;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.aiHeader img {
+    min-width: 30px;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+.top {
+    background: #075E5E;
+}
+
+.section {
+    display: flex;
+    background: #6ECCC1;
+    color: black;
+    padding: 0.5rem 1.5rem;
+}
+
+.robotSection {
+    background: #075E5E;
+    color: white;
+}
+
+.section img {
+    background: white;
+    height: 40px;
+    width: 40px;
+    align-self: center;
+    padding: 8px;
+    border-radius: 20px;
+    margin-right: 14px;
+}
+
+.inputSection {
+    margin-top: auto;
+    padding: 0.8rem 1.5rem;
+}
+
+textarea {
+    padding: 10px 70px 10px 10px;
+    width: calc(100% - 1.5rem - 50px);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: block;
+    font-family:Arial, Helvetica, sans-serif;
+    min-height: 50px;
+    margin-bottom: 20px;
+    position:relative;
+    border:none;
+    resize: none;
+    outline: none; /* add this to stop highlight on focus */
+    border-radius: 10px;
+}
+
+.textareaContainer {
+    position: relative;
+    padding: 0;
+    width: calc(100% - 1.5rem);
+    background: white;
+    border-radius: 10px;
+}
+
+.textareaContainer .submit{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.submit img{
+    background: #205656;
+    padding: 8px;
+    border-radius: 10px;
+}
