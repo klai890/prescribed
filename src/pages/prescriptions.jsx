@@ -29,49 +29,46 @@ const Prescriptions = () => {
     const [note, setNote] = useState(null);
     const [link, setLink] = useState(null);
     const [doctorId, setDoctorId] = useState(null);
-    const [viewArticle, setViewArticle] = useState(false);
     const [doctor, setDoctor] = useState(false); // show doctor panel
     const [articleId, setArticleId] = useState(null); // show article panel
+    const [viewArticle, setViewArticle] = useState(false);
 
     const unread = articles.filter (article => article.unread)
     const read = articles.filter (article => !article.unread)
 
-    const retrieveInfo = (article_id) => {
+    // Allow viewer to read article information
+    const showArticle = (article_id) => {
         var article = articles.filter(a => a.id == article_id)[0];
         setInfo(article['text'])
         setNote(article['doctor_note'])
         setLink(article['link'])
         setDoctorId(article['doctor_id'])
-    }
-    
-    const processUnread = (e) => {
-        var article_id = e.target.id;
         setArticleId(article_id)
-        retrieveInfo(article_id);
+
+        // Change from unread to read.
+        if (article && article.unread == true) article.unread = false;        
     }
 
-    const updateInfo = (e) => {
-        var article_id = e.target.id;
-        retrieveInfo(article_id);
-    }
-
-    const toggleDoctorPanel = (e) => {
+    // Allow viewer to view information of doctor who recommended article.
+    const toggleDoctorPanel = () => {
         setDoctor(!doctor);
     }
 
-    const toggleArticlePanel = (e) => {
+    // Allow viewer to access article source and chatbot.
+    const toggleArticlePanel =  (e) => {
         if (articleId != null) setViewArticle(!viewArticle);
     }
-
+    
   return (
     <div className={styles.main}>
-        <div className={styles.mainContainer}>
 
           { 
           (viewArticle == false) ? 
 
+        <div className={styles.mainContainer}>
           <div className={styles.mainPanel}>     
             <div class={styles.leftPanel}>
+                
                 {/* Left panel top section = Prescribed logo */}
                 <div class={styles.topSection}>
                     <img src={logo} />
@@ -93,7 +90,7 @@ const Prescriptions = () => {
                                 <p className={styles.readStatus}>Unread</p>
                                 {unread.map( a => {
                                     return (
-                                    <button onClick={(e) => processUnread(e)} className={styles.articleButton} id={a.id}>
+                                    <button onClick={(e) => showArticle(a.id)} className={styles.articleButton} id={a.id}>
                                         <div className={styles.thumbnail} id={a.id}>
                                             <div className={styles.imageContainer}><img src={a.image} width={300} id={a.id}/></div>
                                             <p className={styles.title} id={a.id}>{a.title}</p>
@@ -108,7 +105,7 @@ const Prescriptions = () => {
                                 <p className={styles.readStatus}>Recent</p>
                                 {read.map( a => {
                                     return (
-                                    <button onClick={(e) => updateInfo(e)} className={styles.articleButton} id={a.id}>
+                                    <button onClick={(e) => showArticle(a.id)} className={styles.articleButton} id={a.id}>
                                         <div className={styles.thumbnail} id={a.id}>
                                             <div className={styles.imageContainer}><img src={a.image} width={300} id={a.id}/></div>
                                             <p className={styles.title} id={a.id}>{a.title}</p>
@@ -148,7 +145,7 @@ const Prescriptions = () => {
                             <img src={resourceIcon} />
                             <h1 className={styles.resourceHeader}>Resource Name</h1>
                             <p>{info}</p>
-                            <button className={styles.resourceButton} onClick={() => toggleArticlePanel()}>
+                            <button className={styles.resourceButton} onClick={(e) => toggleArticlePanel()}>
                                 View Full Resource <img src={external}></img>
                             </button>
                         </div>
@@ -168,16 +165,17 @@ const Prescriptions = () => {
                 }
             </div>
           </div>
+          </div>
 
           :
           // Show Article
-          <div className={styles.chatContainer}>
-            <button className={styles.exitButton} onClick={(e) => toggleArticlePanel()}><img src={cross} /></button>
-            <Chat articleId={articleId}/>
+          <div className={styles.altMainContainer}>
+            <div className={styles.chatContainer}>
+                <button className={styles.exitButton} onClick={(e) => toggleArticlePanel()}><img src={cross} /></button>
+                <Chat articleId={articleId}/>
+            </div>
           </div>
         }
-        </div>
-
     </div>
   );
 };
