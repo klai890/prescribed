@@ -16,37 +16,49 @@ import DoctorInfo from '../components/doctor_info'
 import Chat from '../components/chat'
 import cross from '../images/cross.svg'
 
-function sortByDate (a1, a2) {
-    var d1 = new Date(a1['date_prescribed'])
-    var d2 = new Date(a2['date_prescribed']);
-    console.log(d1); console.log(d2); console.log(d1 > d2)
-    return d1 - d2;
-}
+// Sort articles in chronological order (most recent at the front)
+function sortDatesAscending(articles) {
+    return articles.sort(function(a, b) {
+      return a.date_prescribed - b.date_prescribed;
+    });
+  }
 
 const Prescriptions = () => {
 
-    const [info, setInfo] = useState(null);
-    const [note, setNote] = useState(null);
-    const [link, setLink] = useState(null);
+    // Render article information
+    const [info, setInfo] = useState(null); // article text
+    const [note, setNote] = useState(null); // article note
+    const [link, setLink] = useState(null); // article link
+    
+    // Render doctor and chat panels.
+    const [doctor, setDoctor] = useState(false);
     const [doctorId, setDoctorId] = useState(null);
-    const [doctor, setDoctor] = useState(false); // show doctor panel
-    const [articleId, setArticleId] = useState(null); // show article panel
+    const [articleId, setArticleId] = useState(null); 
     const [viewArticle, setViewArticle] = useState(false);
-
-    const unread = articles.filter (article => article.unread)
-    const read = articles.filter (article => !article.unread)
+    const [unread, setUnread] = useState(sortDatesAscending(articles.filter (article => article.unread)));
+    const [read, setRead] =  useState(sortDatesAscending(articles.filter(article => article.unread == false)));
 
     // Allow viewer to read article information
     const showArticle = (article_id) => {
         var article = articles.filter(a => a.id == article_id)[0];
-        setInfo(article['text'])
-        setNote(article['doctor_note'])
-        setLink(article['link'])
-        setDoctorId(article['doctor_id'])
-        setArticleId(article_id)
 
-        // Change from unread to read.
-        if (article && article.unread == true) article.unread = false;        
+        if (article) {
+            setInfo(article['text'])
+            setNote(article['doctor_note'])
+            setLink(article['link'])
+            setDoctorId(article['doctor_id'])
+            setArticleId(article_id)
+        }
+
+        // Change from unread to read – must be accompanied by a POST request as well.
+        if (article && article.unread == true) {
+            article.unread = false;        
+            console.log(articles.filter (article => article.unread));
+            console.log(articles.filter (article => article.unread == false));
+            setUnread(sortDatesAscending(articles.filter (article => article.unread)));
+            setRead(sortDatesAscending(articles.filter (article => article.unread == false)));
+        }
+
     }
 
     // Allow viewer to view information of doctor who recommended article.
@@ -58,6 +70,10 @@ const Prescriptions = () => {
     const toggleArticlePanel =  (e) => {
         if (articleId != null) setViewArticle(!viewArticle);
     }
+
+    const submitSearch = (e) => {
+        
+    }
     
   return (
     <div className={styles.main}>
@@ -68,7 +84,7 @@ const Prescriptions = () => {
         <div className={styles.mainContainer}>
           <div className={styles.mainPanel}>     
             <div class={styles.leftPanel}>
-                
+
                 {/* Left panel top section = Prescribed logo */}
                 <div class={styles.topSection}>
                     <img src={logo} />
@@ -81,7 +97,7 @@ const Prescriptions = () => {
                     <div class={styles.column}>
 
                         {/* Search Bar */}
-                        <input type="text" placeholder="Search for your prescription..."/>
+                        <form onSubmit={(e) => submitSearch(e)}><input type="text" placeholder="Search for your prescription..."/></form>
 
                         {/* Unread Articles */}
                         <div className={styles.articleContainer}>
@@ -123,6 +139,7 @@ const Prescriptions = () => {
             <div className={styles.rightPanel}>
 
                 {
+
                     (info == null) ? (<h1>Select a Prescription</h1>) 
                     
                     : 

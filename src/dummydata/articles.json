@@ -12,7 +12,7 @@
     },
     {
         "title": "Med Article 1",
-        "date_prescribed": 1685938868874,
+        "date_prescribed": 168500000000,
         "unread": false,
         "id": 1,
         "doctor_note": "Hello World 2",
@@ -22,8 +22,19 @@
         "image": "https://images.unsplash.com/photo-1602520628350-fbf9db1f02ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
     },
     {
+        "title": "Breaking News: Malignant Cells Rapidly Multiply",
+        "date_prescribed": 1687380676656,
+        "unread": true,
+        "id": 4,
+        "doctor_note": "Hello World 1",
+        "doctor_id": 1,
+        "link": "https://google.com",
+        "text": "Lorem ipsum 2: Lorem ipsum dolor sit amet consectetur. At nulla nam iaculis dolor aliquam in. Dictumst risus pellentesque adipiscing volutpat enim volutpat porttitor id.",
+        "image": "https://images.unsplash.com/photo-1581594294883-5109c202942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80"
+    },
+    {
         "title": "Small Cell Lung Cancer Treatment (PDQ) – Patient Version",
-        "date_prescribed": 1685938877391,
+        "date_prescribed": 1687132800000,
         "unread": true,
         "id": 2,
         "doctor_note": "Hello World 1",

@@ -11,19 +11,19 @@
 .top, .middle, .bottom {
     border-radius: 12px;
     overflow: scroll;
-    padding: 1rem;
+    padding: 0.8rem 1rem;
 }
 
 .top {
     background: #fff;
     color: #075E5E;
     text-transform: capitalize;
-    
     display: flex;
     align-items: center;
     text-align: left;
 }
 
+/* Doctor profile picture at top */
 .doctorImg {
     width: 120px;
     height: 120px;
@@ -36,6 +36,7 @@
     width: 120px;
 }
 
+/* Doctor top section styles */
 .doctorHeader {
     line-height: 1rem;
 }
@@ -61,10 +62,12 @@
     
 }
 
+/* About the doctor */
 .middle {
     background: #075E5E;
 }
 
+/* Prescriptions */
 .bottom {
     background: #6ECCC1;
 }
@@ -75,79 +78,6 @@
     flex-direction: column;
 }
 
-.mainContainer {
-    height: 100%;
-    max-height: 100%;
-    padding: 2.5%;
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(#075D5D, #059F96);
-    padding: 1rem;
-}
-
-.mainPanel {
-    height: 100%;
-    max-height: 100%;
-    border-radius: 12px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 20px;
-}
-
-.leftPanel, .rightPanel {
-    align-items: center;
-    background: linear-gradient(to bottom right, rgb(172, 208, 207, 0.7), rgba(43, 100, 100, 0.33));
-    border-radius: 12px;
-    text-align: center;
-    color: white;
-    overflow: hidden;
-}
-
-.rightPanel {
-    overflow:scroll;
-    background: none;
-}
-
-.column {
-    padding: 0 2rem;
-    text-align: left;
-}
-
-input[type='text'],
-input[type='password'] {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    max-width: 95%;
-    margin-bottom: 20px;
-}
-
-
-.topSection {
-    padding: 1rem;
-}
-
-
-.doctorSection, .resourceSection { 
-    padding: 2rem 5rem;
-    background: linear-gradient(to bottom right, rgb(172, 208, 207, 0.7), rgba(43, 100, 100, 0.33));
-    border-radius: 12px;
-    line-height: 1.3rem;
-    max-height: 100%;
-}
-
-.doctorSection {
-    max-height: 15%;
-    height: 15%;
-}
-
-.resourceSection {
-    margin-top: 1rem;
-    max-height: 70%;
-    height: 70%;
-    overflow: scroll;
-}
-
 .doctorSection > p, .resourceSection > p{
     text-align: left;
 }
@@ -155,78 +85,6 @@ input[type='password'] {
 .resourceHeader {
     border-bottom: 1px solid white;
     padding-bottom: 2rem;
-}
-
-/* Main content container in left panel – nav bar and article search. */
-.bottomSection {
-display: grid;
-grid-template-columns: 1.2fr 2fr;
-}
-
-.topPanel {
-position: relative;
-height: calc(33.33% - 1px);
-}
-
-.whiteButton, .backButton {
-position: absolute;
-top: 10%;
-right:0px; /* Adjust the button's position as needed */
-transform: translateY(-50%);
-background-color: #fff;
-color: #2B5B5B;
-padding: 0;
-border: none;
-cursor: pointer;
-max-width: 125px;
-text-align: center;
-font-weight: normal;
-font-size: 16px;
-padding: 8px;
-display: flex;
-align-items: center;
-border-radius: 90px;
-justify-content: center;
-}
-
-.backButton {
-box-shadow: 2px 2px 2px 2px black;
-
-}
-
-.resourceButton{
-background-color: #fff;
-color: #2B5B5B;
-padding:12px;
-width: 50%;
-border: none;
-cursor: pointer;
-border-radius: 100px;
-margin: 1rem 0;
-font-weight: normal;
-}
-
-/* Override link styles. */
-.resourceButton a{
-    display: block;
-    color: #2B5B5B;
-    text-decoration: none;
-}
-
-
-.gap {
-    height: 1px;
-    background-color: transparent;
-}
-
-.article {
-    border-bottom: 2px solid white;
-    padding: 1rem 0;
-}
-
-/* No white line for last article. */
-.article:last-child {
-    border: none;
 }
 
 .articleButton{ 
@@ -250,10 +108,13 @@ font-weight: normal;
     display: flex;
     flex-direction: column;
     border: 2px solid white;
+    margin-bottom: 20px;
 }
 
 .date {
     text-align: left;
+    font-weight: 600;
+    margin: 8px 3px;
 }
 
 
@@ -278,4 +139,25 @@ font-weight: normal;
 .articleButton:hover {
     background: none;
     cursor: pointer;
+}
+
+.articleLink, .articleButton {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.article {
+    width: 310px;
+    margin: 0 10px;
+}
+
+.articleContainer {
+    display: flex;
+    flex-wrap:wrap;
+}
+
+/* No white line for last article. */
+.article:last-child {
+    border: none;
 }

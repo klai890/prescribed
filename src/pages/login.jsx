@@ -26,17 +26,20 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    
     // Connec tto database.
-
+    
     // Add login functionality
     console.log('Login form submitted');
     console.log('Username:', username);
     console.log('Birthday:', birthday);
 
-    try {
-      navigate(`/prescriptions`);
-    } catch (err) {console.error(err)}
+    var loginSuccessful = true;
+    if (loginSuccessful) {
+      try {
+        navigate(`/prescriptions`);
+      } catch (err) {console.error(err)}
+    }
 
   };
 

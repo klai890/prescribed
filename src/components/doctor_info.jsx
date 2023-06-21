@@ -10,14 +10,43 @@ import doctorImg from '../images/doctor_img.jpg'
 import doctorData from '../dummydata/doctors.json'
 import articles from '../dummydata/articles.json'
 
+const getDateString = (date) => {
+  var mm = ""
+  switch(date.getMonth()){
+    case (0): mm =  "January"; break;
+    case (1): mm =  "February";break;
+    case(2): mm =  "March";break;
+    case (3): mm =  "April";break;
+    case (4): mm =  "May";break;
+    case (5): mm =  "June";break;
+    case (6): mm =  "July";break;
+    case (7): mm =  "August";break;
+    case (8): mm =  "September";break;
+    case (9): mm =  "October";break;
+    case (10): mm =  "November";break;
+    case (11): mm =  "December";break;
+    default: mm =  ""; return;
+  }
+
+  var dd = date.getDate();
+  var yy = date.getFullYear();
+
+  return `${mm} ${dd}, ${yy}`
+}  
+
+
+// Sort articles in chronological order (most recent at the front)
+function sortDatesAscending(articles) {
+  return articles.sort(function(a, b) {
+    return a.date_prescribed - b.date_prescribed;
+  });
+}
+
 const DoctorInfo = ({id}) => {
 
   const doctor = doctorData.filter(d => d.id == id)[0];
   const recs = articles.filter ( article => article.doctor_id == id)
 
-  const updateInfo = (e) => {
-      var article_id = e.target.id;
-  }
 
 
   return (
@@ -50,18 +79,18 @@ const DoctorInfo = ({id}) => {
       <div className={styles.bottom}>
         <h1 className={styles.headingAlt}>Prescriptions</h1>
         <div className={styles.articleContainer}>
-          {recs.map ( a => {
+          {sortDatesAscending(recs).map ( a => {
             var article_date = new Date(a.date_prescribed)
-            console.log(article_date.toLocaleDateString());
+            var dateStr = getDateString(article_date)
             return (
               <div className={styles.article}>
-                <button onClick={(e) => updateInfo(e)} className={styles.articleButton} id={a.id}>
-                      <p className={styles.date}>{article_date.toLocaleDateString()}</p>
+                <a href={a.link} target="_blank" className={styles.articleLink} id={a.id}>
+                      <p className={styles.date}>{dateStr}</p>
                     <div className={styles.thumbnail} id={a.id}>
                         <div className={styles.imageContainer}><img src={a.image} width={300} id={a.id}/></div>
                         <p className={styles.title} id={a.id}>{a.title}</p>
                     </div>
-                </button>
+                </a>
               </div>)
           })}
         </div>

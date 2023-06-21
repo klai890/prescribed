@@ -6,7 +6,7 @@
 
     .mainContainer, .altMainContainer {
 
-      /* I suck at finding the right height, with all the padding it's difficult. So, arbitrarily set it to calc 100% - 4%, works well on this device */
+      /* I suck at finding the right height, with all the padding it's difficult. So, arbitrarily set it to calc 100% - 4%, works well on this device. */
         height: calc(100% - 4%);
         padding: 2.5%;
         display: flex;

@@ -8,14 +8,11 @@ import React, {useState} from 'react'
 import logo from '../images/logo-light.svg'
 import styles from './prescriptions.module.css'
 import doctorStyles from './doctors.module.css'
-import infoStyles from '../components/doctor_info.module.css'
 import Nav from '../components/nav'
 import { useRef } from 'react';
 import doctorData from '../dummydata/doctors.json'
 import articleData from '../dummydata/articles.json'
-import doctorImg from '../images/doctor_img.jpg'
-import cross from '../images/cross.svg'
-import Chat from '../components/chat'
+import DoctorInfo from '../components/doctor_info'
 
 const Doctors = () => {
 
@@ -58,6 +55,7 @@ const Doctors = () => {
         node.className = `${doctorStyles.doctorContainer} ${doctorStyles.selected}`
     }
 
+    // Toggle chat panel... if we can get that to work... for now, it's just a link.
     const toggleArticlePanel =  (e) => {
         if (articleId != null) setViewArticle(!viewArticle);
     }
@@ -67,12 +65,14 @@ const Doctors = () => {
         toggleArticlePanel()    
     }
 
+    // Search for doctor
+    const submitSearch = (e) => {
+        // TODO: Search doctors.
+    }
+
 
   return (
     <div className={styles.main}>
-
-        { 
-          (viewArticle == false) ? 
 
         <div className={styles.mainContainer}>
           <div className={styles.mainPanel}>     
@@ -91,7 +91,7 @@ const Doctors = () => {
                     <div class={styles.column}>
 
                         {/* Search Bar */}
-                        <input type="text" placeholder="Search for your prescription..."/>
+                        <form onSubmit={(e) => submitSearch(e)}><input type="text" placeholder="Search for your doctor..."/></form>
 
                         {/* Unread Articles */}
                         <div className={styles.articleContainer}>
@@ -123,69 +123,14 @@ const Doctors = () => {
           </div>
         
             {doctorId ? 
-                <div className={infoStyles.rightPanel}>
-                    <div className={infoStyles.container}>
-
-                    {/* Doctor overview */}
-                    <div className={infoStyles.top}>
-                    <div className={infoStyles.doctorImg}><img src={doctorImg} /></div>
-                    <div className={infoStyles.doctorHeader}>
-                        <h1>Dr. {doctorInfo.name}</h1>
-                        <h2 className={infoStyles.byline}>{doctorInfo.field}</h2>
-                        <div className={infoStyles.specialtyContainer}>
-                        <h3 className={infoStyles.bylineSmaller}>Speciality Diseases</h3>
-                        <ul>
-                            {doctorInfo["diseases"].map(d => {
-                            return (<li>{d}</li>)
-                            })}
-                        </ul>
-                        </div>
-                    </div>
-                    </div>
-
-                    {/* About the doctor */}
-                    <div className={infoStyles.middle}>
-                        <h1 className={infoStyles.headingAlt}>About the Doctor</h1>
-                        <p>{doctorInfo.about}</p>
-                    </div>
-
-                    {/* Prescriptions by doctor */}
-                    <div className={infoStyles.bottom}>
-                    <h1 className={infoStyles.headingAlt}>Prescriptions</h1>
-                    <div className={infoStyles.articleContainer}>
-                        {articles.map ( a => {
-                            var article_date = new Date(a.date_prescribed)
-                            console.log(article_date.toLocaleDateString());
-                            return (
-                                <div className={infoStyles.article}>
-                                <button onClick={() => updateArticleInfo(a.id)} className={infoStyles.articleButton} id={a.id}>
-                                    <p className={infoStyles.date}>{article_date.toLocaleDateString()}</p>
-                                    <div className={infoStyles.thumbnail} id={a.id}>
-                                        <div className={infoStyles.imageContainer}><img src={a.image} width={300} id={a.id}/></div>
-                                        <p className={infoStyles.title} id={a.id}>{a.title}</p>
-                                    </div>
-                                </button>
-                            </div>)
-                        })}
-                    </div>
-                    </div>
-                    </div>
-
-                </div> : <div className={infoStyles.rightPanel}><h1>Select a Doctor</h1></div>
+                <div className={styles.rightPanel}>
+                    <DoctorInfo id={doctorId} />
+                </div> : 
+                <div className={styles.rightPanel}><h1>Select a Doctor</h1></div>
             }
           </div>
         </div>
 
-
-    :
-    // Show Article
-    <div className={styles.altMainContainer}>
-          <div className={styles.chatContainer}>
-              <button className={styles.exitButton} onClick={(e) => toggleArticlePanel()}><img src={cross} /></button>
-              <Chat articleId={articleId}/>
-          </div>
-        </div>
-    }
     </div>
   );
 };
