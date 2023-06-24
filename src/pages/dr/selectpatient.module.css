@@ -1,0 +1,167 @@
+
+/* .mainContainer, .main  copied over from prescriptions.module.css */
+
+.mainContainer {
+    /* I suck at finding the right height, with all the padding it's difficult. So, arbitrarily set it to calc 100% - 4%, works well on this device. */
+        min-height: calc(100% - 4%);
+        height: calc(100% - 4%);
+        padding: 2.5%;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(#075D5D, #059F96);
+        padding: 1rem;
+  }
+
+.main{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainPanel, .twoCols {
+    height: 100%;
+    max-height: 100%;
+    width: 100%;
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    grid-column-gap: 20px;
+}
+
+/* Alternative to .mainPanel, but has two columns, the right being the larger which reads
+   'Clicking “Confirm” will start an encounter and recording'*/
+
+.twoCols {
+    grid-template-columns: 25% 75%;
+}
+
+.initialView {
+    color: rgba(235, 246, 245, 0.3);
+    text-align: center;
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 119.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+}
+
+.leftCol, .middleCol, .rightCol {
+    background: rgba(199, 205, 204, 0.15);
+    border-radius: 12px;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+    padding: 1rem;
+    position: relative;
+}
+
+.leftCol {
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+}
+
+/* Form Styling */
+#searchPatient input[type="text"] {
+    min-width: 200px;
+    border-radius: 12px;
+    background: none;
+    color: white;
+    padding: 0.75rem;
+}
+
+#searchPatient input[type="text"]::placeholder {color: white;}
+
+#searchPatient input[type="text"]:focus, #searchPatient input[type="text"]:focus-visible,  #searchPatient input[type="text"]:focus-within {
+    outline: none;
+}
+
+/* Submit Button Styles */
+.buttonAlt {
+    color: white;
+    border-radius: 12px;
+    background: rgb(7, 93, 93);
+    min-width: 217px;
+    border: none;
+    font-size: 1rem;
+    min-height: 42px;
+    padding: 0.5rem;
+}
+
+.buttonAlt:hover {
+    background: rgba(7, 93, 93, 0.7)
+}
+
+.buttonAlt:focus, .clearSearchbar:focus {
+    outline: 1px solid white; /* easier to see on dark backgrounds */
+}
+
+.buttonContainer {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 20px;
+    padding: 1rem;
+    width: calc(100% - 2rem);
+}
+
+.clearButton {
+    background: none;
+    width: 100%;
+    border: 1px solid white;
+    border-radius: 12px;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.clearButton:hover {
+    background: rgba(255, 255, 255, 0.2)
+}
+
+#recommendButton {
+    position: absolute;
+    bottom: 0;
+    width: 200px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    color: rgba(43, 91, 91, 1);
+    transform: translate(-50%, -50%);
+    right:25%;
+    left:50%;
+}
+
+/* Upward chevron – need space between img and text */
+#recommendButton img {
+    margin-left: 5px;
+}
+
+.btnImage {
+    margin-right: 8px;
+}
+
+/* Styles specific to "Add New Prescrition +" button */
+#addButton {
+    display: inline-flex;
+    align-items: center;   
+    justify-content: center;
+    width: 100%;
+}
+
+#addButton img {
+    margin-left: 8px;
+}
+
+.clearSearchbar {
+    background: none;
+    color: white;
+}
+
+.clearSearchbar::placeholder {
+    color: white;
+}

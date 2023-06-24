@@ -1,0 +1,12 @@
+
+.doctorImg {
+    width: 120px;
+    height: 120px;
+    border-radius: 100px;
+    overflow: hidden;
+    margin-right: 20px;
+}
+
+.doctorImg img {
+    width: 120px;
+}

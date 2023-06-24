@@ -10,6 +10,8 @@ import {
 import Login from './pages/login';
 import Prescriptions from './pages/prescriptions';
 import Doctors from './pages/doctors';
+import DrLogin from './pages/dr/login'
+import SelectPatient from './pages/dr/SelectPatient'
 
 const App = () => {
   return (
@@ -18,6 +20,8 @@ const App = () => {
           <Route exact path="/" element={<Login/>} />
           <Route exact path="/prescriptions" element={<Prescriptions/>} />
           <Route exact path="/doctors" element={<Doctors/>} />
+          <Route exact path="/dr/login" element={<DrLogin />} />
+          <Route exact path="/dr/selectpatient" element={<SelectPatient />} />
         </Routes>
     </Router>
   );

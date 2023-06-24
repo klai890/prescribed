@@ -261,3 +261,8 @@
     display:absolute;
     border-radius: 12px;
 }
+
+.searchbar {
+  width: 100%;
+  min-width: 300px;
+}

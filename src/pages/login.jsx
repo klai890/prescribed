@@ -27,7 +27,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Connec tto database.
+    // Connect to database.
     
     // Add login functionality
     console.log('Login form submitted');
@@ -53,7 +53,7 @@ const Login = () => {
             
               <div className={styles.loginContainer}>
                   <img src={logo} />
-                  <form onSubmit={handleSubmit}>
+                  <form className={styles.loginForm} onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>
                       <label htmlFor="username" className={styles.textLabel}>Full Name:</label>
                       <input
@@ -75,14 +75,14 @@ const Login = () => {
                       />
                     </div>
                     <div className={styles.smallerInput}>
-                      <input 
+                      <div><input 
                         type="checkbox"
                         id="remember"
                         value={remember}
                         onChange={handleRememberChange}
-                      /> <label htmlFor="remember">Remember me for 30 days</label>
+                      /> <label htmlFor="remember">Remember me for 30 days</label></div>
                     </div>
-                    <div className="button-container">
+                    <div className={styles.buttonContainer}>
                       <button type="submit">Login</button>
                     </div>
                   </form>

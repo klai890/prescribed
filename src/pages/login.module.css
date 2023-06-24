@@ -12,7 +12,7 @@
     background: linear-gradient(#075D5D, #059F96)
 }
 
-.mainPanel {
+.mainPanel, .drMainPanel {
     height: 100%;
     background: #EBF6F5;
     border-radius: 12px;
@@ -58,29 +58,48 @@
     margin-bottom: 15px;
   }
 
+
+form.loginForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
   .textLabel {
     display: block;
     margin-bottom: 5px;
   }
   
-  input[type='text'],
-  input[type='password'] {
+  .loginForm input[type='text'],
+  .loginForm input[type='password'] {
     width: 100%;
-    padding: 10px;
+    min-width: 300px;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
   }
 
+  /* Flex bc login in dr side needs flex. */
   .smallerInput {
-    display: block;
-    margin-bottom: 15px;
+    display: flex;
+    margin-bottom: 30px;
     font-size: 0.9rem;
     color: #888888;
+    display: flex;
+    min-width: 300px;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
   }
   
   .buttonContainer {
     display: flex;
     justify-content: center;
+  }
+
+  .buttonContainer button {
+    min-width: 300px;
   }
 
   button {
@@ -91,10 +110,11 @@
     font-size: 20px;
     font-weight: bold;
     border: none;
-    border-radius: 12px;
+    border-radius: 100px;
     cursor: pointer;
     margin: 0;
   }
+
   
   button:hover {
     background-color: #0d7e7e;

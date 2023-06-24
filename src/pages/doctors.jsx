@@ -91,7 +91,7 @@ const Doctors = () => {
                     <div class={styles.column}>
 
                         {/* Search Bar */}
-                        <form onSubmit={(e) => submitSearch(e)}><input type="text" placeholder="Search for your doctor..."/></form>
+                        <form onSubmit={(e) => submitSearch(e)}><input className={styles.searchbar} type="text" placeholder="Search for your doctor..."/></form>
 
                         {/* Unread Articles */}
                         <div className={styles.articleContainer}>
