@@ -7,13 +7,25 @@ import mainStyles from '../prescriptions.module.css'
 import plus from '../../images/plus.svg'
 import chevron from '../../images/upward-chevron.svg'
 import EditProfile from '../../components/EditProfile'
+import pencil from '../../images/pencil.svg'
 
 const SelectPatient = () => {
 
     const [name, setName] = useState(null);
     const [birthday, setBirthday] = useState(null);
+    
+    // Toggle Views
     const [initialView, setInitialView] = useState(true);
     const [viewProfile, setViewProfile] = useState(false); // view doctor profile.
+    const [viewAdd, setViewAdd] = useState(false) // view add resource panel
+    const [viewEdit, setViewEdit] = useState(false) // view edit reosurce panel
+    const [viewRecommendations, setViewRecommendations] = useState(false) // view recommendations
+    const [viewPrescribe, setViewPrescribe] = useState(false) // view prescribe panel
+    
+    // Edit a particular resource
+    const [articleId, setArticleId] = useState(null); // article url for resource
+    const [note, setNote] = useState(null) // note for patient
+
     const container = useRef(null)
 
     const handleNameChange = (e) => {
@@ -55,6 +67,11 @@ const SelectPatient = () => {
         setViewProfile(!viewProfile);
     }
 
+    const handleViewEdit = (a_id) => {
+        setArticleId(a_id);
+        console.log(viewEdit);
+        setViewEdit(true);
+    }
 
     const submitSearch = (e) => {
         
@@ -63,6 +80,10 @@ const SelectPatient = () => {
     // Todo – Token fetch.
     const getDoctorId = (e) => {
         return 1;
+    }
+
+    const handleViewRecommendations = (e) => {
+        setViewRecommendations(!viewRecommendations)
     }
         
     // if neither view content nor view profile: initialView, "Confirm" prompt, remove middle and right cols
@@ -120,20 +141,111 @@ const SelectPatient = () => {
                         // Patient Recommendations
                         <>
                             <div className={styles.middleCol}>
+
+                                {viewPrescribe?
+                                    <>
+                                        <button onClick={(e) => setViewPrescribe(false)}>Back</button>
+                                        Prescribe resource
+                                    </>
+
+                                    :
+
+                                    (viewEdit) ? 
+
+                                    <>
+                                        <button onClick={(e) => setViewEdit(false)}>Back</button>
+                                        View Edit Panel
+                                    </>
+
+                                    :
+
+                                    (viewAdd) ? 
+
+                                    <>
+                                        <button onClick={(e) => setViewAdd(false)}>Back</button>
+                                        View Add Panel
+                                    </>
+
+                                    :
+
+                                    <>
+                                        <h1>Select Prescription Material</h1>
+
+                                        
+                                        {/* If want to show recommendations, replace all of this.*/}
+                                        {(viewRecommendations) ? 
+                                        <>
+                                            View Recommendations
+                                            {/* Articles container */}
+                                            <div className={styles.articleContainer}>
+                                                {articles.map( a => {
+                                                    return (
+                                                    <button onClick={(e) => setViewPrescribe(true)} className={styles.articleButton} id={a.id}>
+                                                        <div className={styles.thumbnail} id={a.id}>
+                                                            <div className={styles.imageContainer}><img src={a.image} width={300} id={a.id}/></div>
+                                                            <p className={styles.title} id={a.id}>{a.title}</p>
+                                                        </div>
+                                                    </button>)
+                                                })}
+                                            </div>
+
+                                            <button id={styles.recommendButton} onClick={handleViewRecommendations}>
+                                                Recommend <img src={chevron} width={22} />
+                                            </button>
+                                        </>
+                                        :
+                                        <>
+                                            <form onSubmit={(e) => submitSearch(e)}>
+                                                <input className={`${mainStyles.searchbar} ${styles.clearSearchbar}`} type="text" placeholder="Search"/>
+                                            </form>
+                                            <button className={styles.buttonAlt} id={styles.addButton} onClick={(e) => setViewAdd(true)}>
+                                                Add New Prescription <img src={plus} />
+                                            </button>
+
+                                            {/* Articles container */}
+                                            <div className={styles.articleContainer}>
+                                                {articles.map( a => {
+                                                    return (
+                                                        // Need the extra outer div to position the edit button. too many divs :\
+                                                        <div className={styles.article}>
+                                                            <button onClick={(e) => setViewPrescribe(true)} className={styles.articleButton} id={a.id}>
+                                                                <div className={styles.line}></div>
+                                                                <div className={styles.articleHeading}>
+                                                                    {/* Link + Title */}
+                                                                    <div>
+                                                                        <a href={a.link} target="_blank">{a.link}</a>
+                                                                        <p className={styles.title} id={a.id}>{a.title}</p> 
+                                                                    </div>
+
+                                                                    {/* Image */}
+                                                                    <div className={styles.thumbnail} id={a.id}>
+                                                                        <div className={styles.imageContainer}><img src={a.image} width={300} id={a.id}/></div>
+                                                                    </div>
+                                                                </div>
+
+                                                                {/* Text preview */}
+                                                                <div className={styles.textPreview}>
+                                                                    <p>{a.text}</p>
+                                                                </div>
+
+                                                            </button>
+                                                            <button className={styles.buttonAlt} id={styles.editButton} onClick={(e) => handleViewEdit(a.id)}>
+                                                                Edit <img src={pencil} />
+                                                            </button>
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+
+                                            <button id={styles.recommendButton} onClick={handleViewRecommendations}>
+                                                Recommend <img src={chevron} width={22} />
+                                            </button>
+                                        </>}
+                                    </>
+                                }
                                 
-                                <h1>Select Prescription Material</h1>
-                                <form onSubmit={(e) => submitSearch(e)}>
-                                    <input className={`${mainStyles.searchbar} ${styles.clearSearchbar}`} type="text" placeholder="Search"/>
-                                </form>
-                                <button className={styles.buttonAlt} id={styles.addButton}>Add New Prescription <img src={plus} /></button>
 
-                                {/* Articles container */}
-                                <div>
-                                </div>
 
-                                <button id={styles.recommendButton}>
-                                    Recommend <img src={chevron} width={22} />
-                                </button>
                             </div>
 
                             <div className={styles.rightCol}>

@@ -1,5 +1,5 @@
 
-/* .mainContainer, .main  copied over from prescriptions.module.css */
+/* ImainContainer, .main  copied over from prescriptions.module.css */
 
 .mainContainer {
     /* I suck at finding the right height, with all the padding it's difficult. So, arbitrarily set it to calc 100% - 4%, works well on this device. */
@@ -63,6 +63,10 @@
     justify-content:space-between;
 }
 
+.middleCol {
+    overflow: scroll;
+}
+
 /* Form Styling */
 #searchPatient input[type="text"] {
     min-width: 200px;
@@ -123,7 +127,7 @@
 }
 
 #recommendButton {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 200px;
     display: inline-flex;
@@ -157,6 +161,19 @@
     margin-left: 8px;
 }
 
+#editButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-height: 0;
+    min-width: 0;
+    width: 70px;
+    height: 40px;
+    padding: 0;
+    border-radius: 12px;
+    transform: translate(30%,-30%);
+}
+
 .clearSearchbar {
     background: none;
     color: white;
@@ -165,3 +182,105 @@
 .clearSearchbar::placeholder {
     color: white;
 }
+
+/* Article container */
+.articleButton{ 
+    padding: 0;
+    margin: 0;
+    background: 0;
+    border: none;
+    width: 100%;
+    height: 250px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    border-radius: 12px;
+    background: rgba(199, 205, 204, 0.26);
+    position: relative;
+    padding: 30px;
+    box-shadow: 0.5px 0.5px 0.5px 0.5px black;
+  }
+
+  .article {
+    height: 250px;
+    position: relative;
+  }
+
+  .line {
+    background: blue;
+    width: 10px;
+    height: 250px;
+    position: absolute;
+    border-radius: 12px 0px 0px 12px;
+    background: #075D5D;
+  }
+
+  .textPreview p{
+        display: -webkit-box;
+        max-width: 100%;
+        font-weight: normal;
+        font-size: 16px;
+        text-align: left;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .textPreview{
+        height: 100%;
+    }
+
+
+  .thumbnail {
+    text-align: center;
+    border-radius: 12px;
+    display: inline-block;
+    color: black;
+    width: 150px;
+    height: 80px;
+}
+
+.imageContainer {
+    width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    display: inline-block;
+    border-radius: 12px;
+}
+
+
+.title {
+    margin: 0;
+    font-size: x-large;
+    padding: 12px;
+    display:absolute;
+    padding: 8px 0;
+    border-radius: 12px;
+}
+
+.thumbnail img {
+    margin: 0;
+    border-radius: 12px;
+    display: block;
+}
+
+
+.articleButton:hover {
+    background: rgba(199, 205, 204, 0.1);
+}
+
+  .articleContainer {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    margin-top: 20px;
+  }
+
+  .articleHeading {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    text-align: left;
+    align-items: center;
+  }
