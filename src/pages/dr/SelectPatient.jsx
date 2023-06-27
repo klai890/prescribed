@@ -8,6 +8,10 @@ import plus from '../../images/plus.svg'
 import chevron from '../../images/upward-chevron.svg'
 import EditProfile from '../../components/EditProfile'
 import pencil from '../../images/pencil.svg'
+import leftArrow from '../../images/leftarrow.svg'
+import upload from '../../images/upload.svg'
+import cross from '../../images/cross-transparent.svg'
+import check from '../../images/check-transparent.svg'
 
 const SelectPatient = () => {
 
@@ -77,6 +81,24 @@ const SelectPatient = () => {
         
     }
 
+    const submitNewSource = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+
+        // ADD new data to view
+        // POST new data
+    }
+
+    const submitEditedSource = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+
+        // ADD new data to view
+        // POST new data
+    }
+
     // Todo – Token fetch.
     const getDoctorId = (e) => {
         return 1;
@@ -128,7 +150,10 @@ const SelectPatient = () => {
   
                         // View Profile
                         (viewProfile)?
-                            <EditProfile id={getDoctorId()} />
+                            <div className={styles.middleCol}>
+                                <button onClick={handleViewProfile} id={styles.profileBackButton}><img src={leftArrow} />Back</button>
+                                <EditProfile id={getDoctorId()} />
+                            </div>
                         :
 
                         (initialView) ?
@@ -140,35 +165,76 @@ const SelectPatient = () => {
                         
                         // Patient Recommendations
                         <>
-                            <div className={styles.middleCol}>
 
                                 {viewPrescribe?
-                                    <>
-                                        <button onClick={(e) => setViewPrescribe(false)}>Back</button>
+                                <div className={styles.middleCol}>
+                                        <button onClick={(e) => setViewPrescribe(false)} id={styles.profileBackButton}>
+                                            <img src={leftArrow} />Back
+                                        </button>
+
                                         Prescribe resource
-                                    </>
+                                    </div>
 
                                     :
 
                                     (viewEdit) ? 
 
-                                    <>
-                                        <button onClick={(e) => setViewEdit(false)}>Back</button>
-                                        View Edit Panel
-                                    </>
+                                    <div className={styles.blurBackground}>
+                                        <button onClick={(e) => setViewEdit(false)} id={styles.profileBackButton}>
+                                            <img src={leftArrow} />Back
+                                        </button>
+
+                                        <div className={styles.panelHeader}><h1>Edit Resource</h1></div>
+                                        <form className={styles.form} onSubmit={submitEditedSource}>
+                                                <label>Upload from URL </label>
+                                                <div id={styles.urlContainer}>
+                                                    <input type="text" />
+                                                    <p id={styles.https}>https://</p>
+                                                </div>
+
+                                            <label>Note to Patient on resource (optional)
+                                                <textarea name="" id="" cols="30" rows="10"></textarea>
+                                            </label>
+
+                                            <div className={styles.buttonContainer}>
+                                                <button type="reset">Delete <img src={cross} /></button>
+                                                <button type="submit">Save <img src={check} /></button>
+                                            </div>
+                                        </form>
+                                    </div>
 
                                     :
 
                                     (viewAdd) ? 
 
-                                    <>
-                                        <button onClick={(e) => setViewAdd(false)}>Back</button>
-                                        View Add Panel
-                                    </>
+                                    <div className={styles.blurBackground}>
+                                        <button onClick={(e) => setViewAdd(false)} id={styles.profileBackButton}>
+                                            <img src={leftArrow} />Back
+                                        </button>
+
+                                        <div className={styles.panelHeader}><h1>Add Resource</h1></div>
+                                        <form className={styles.form} onSubmit={submitNewSource}>
+
+                                                <label>Upload from URL
+                                                </label>
+                                                <div id={styles.urlContainer}>
+                                                    <input type="text" />
+                                                    <p id={styles.https}>https://</p>
+                                                </div>
+
+                                            <label>Note to Patient on resource (optional)
+                                                <textarea name="" id="" cols="30" rows="10"></textarea>
+                                            </label>
+
+                                            <button type="submit"> Upload 
+                                                <img src={upload} width={20} />
+                                            </button>
+                                        </form>
+                                    </div>
 
                                     :
 
-                                    <>
+                                    <div className={styles.middleCol}>
                                         <h1>Select Prescription Material</h1>
 
                                         
@@ -241,12 +307,11 @@ const SelectPatient = () => {
                                                 Recommend <img src={chevron} width={22} />
                                             </button>
                                         </>}
-                                    </>
+                                    </div>
                                 }
                                 
 
 
-                            </div>
 
                             <div className={styles.rightCol}>
                                 <h1>{name}'s view</h1>

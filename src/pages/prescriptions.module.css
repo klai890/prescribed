@@ -54,6 +54,7 @@
         text-align: left;
     }
 
+    /* Main styles for all inputs in this project. */
     input[type='text'],
     input[type='password'] {
         padding: 10px;
