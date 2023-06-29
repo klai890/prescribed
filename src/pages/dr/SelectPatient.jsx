@@ -6,12 +6,14 @@ import articles from '../../dummydata/articles.json'
 import mainStyles from '../prescriptions.module.css'
 import plus from '../../images/plus.svg'
 import chevron from '../../images/upward-chevron.svg'
+import downChevron from '../../images/down-chevron.svg'
 import EditProfile from '../../components/EditProfile'
 import pencil from '../../images/pencil.svg'
 import leftArrow from '../../images/leftarrow.svg'
 import upload from '../../images/upload.svg'
 import cross from '../../images/cross-transparent.svg'
 import check from '../../images/check-transparent.svg'
+import questions from '../../dummydata/questions.json'
 
 const SelectPatient = () => {
 
@@ -27,7 +29,7 @@ const SelectPatient = () => {
     const [viewPrescribe, setViewPrescribe] = useState(false) // view prescribe panel
     
     // Edit a particular resource
-    const [articleId, setArticleId] = useState(null); // article url for resource
+    const [article, setArticle] = useState(null); // article for resource
     const [note, setNote] = useState(null) // note for patient
 
     const container = useRef(null)
@@ -72,7 +74,7 @@ const SelectPatient = () => {
     }
 
     const handleViewEdit = (a_id) => {
-        setArticleId(a_id);
+        setArticle(articles.filter(a => a.id == a_id)[0])
         console.log(viewEdit);
         setViewEdit(true);
     }
@@ -104,8 +106,22 @@ const SelectPatient = () => {
         return 1;
     }
 
+    const handleViewPrescribed = (a) => {
+        setArticle(a);
+        setViewPrescribe(true);
+    }
+
     const handleViewRecommendations = (e) => {
         setViewRecommendations(!viewRecommendations)
+    }
+
+    const handlePrescribeSubmission = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+
+        // ADD new data to view
+        // POST new data
     }
         
     // if neither view content nor view profile: initialView, "Confirm" prompt, remove middle and right cols
@@ -167,12 +183,32 @@ const SelectPatient = () => {
                         <>
 
                                 {viewPrescribe?
-                                <div className={styles.middleCol}>
+                                <div className={styles.middleCol} id={styles.prescribeContainer}>
                                         <button onClick={(e) => setViewPrescribe(false)} id={styles.profileBackButton}>
                                             <img src={leftArrow} />Back
                                         </button>
+                                        <div id={styles.articleImage}><img src={article.image} /></div>
+                                        <form className={styles.form} onSubmit={handlePrescribeSubmission}>
+                                            <label>
+                                                <span>Title</span>
+                                                <input type="text" value={article.title}/>
+                                            </label>
 
-                                        Prescribe resource
+                                            <label>
+                                                <span>Summary</span>
+                                                <textarea id={styles.summaryTextarea}>
+                                                    {article.text}
+                                                </textarea>
+                                            </label>
+
+                                            <label>
+                                                <span>Note to this Patient on resource (optional)</span>
+                                                <textarea></textarea>
+                                            </label>
+
+                                            <button type="submit">Prescribe to Patient</button>
+                                        </form>
+
                                     </div>
 
                                     :
@@ -236,28 +272,67 @@ const SelectPatient = () => {
 
                                     <div className={styles.middleCol}>
                                         <h1>Select Prescription Material</h1>
-
                                         
                                         {/* If want to show recommendations, replace all of this.*/}
                                         {(viewRecommendations) ? 
                                         <>
-                                            View Recommendations
-                                            {/* Articles container */}
-                                            <div className={styles.articleContainer}>
-                                                {articles.map( a => {
-                                                    return (
-                                                    <button onClick={(e) => setViewPrescribe(true)} className={styles.articleButton} id={a.id}>
-                                                        <div className={styles.thumbnail} id={a.id}>
-                                                            <div className={styles.imageContainer}><img src={a.image} width={300} id={a.id}/></div>
-                                                            <p className={styles.title} id={a.id}>{a.title}</p>
-                                                        </div>
-                                                    </button>)
-                                                })}
-                                            </div>
+                                            <div id={styles.border}></div>
+                                            <div id={styles.recommendationContainer}>
+                                                <button onClick={(e) => setViewRecommendations(false)} id={styles.profileBackButton}>
+                                                    <img src={leftArrow} />Back
+                                                </button>
+                                                {/* Articles container */}
+                                                <div className={styles.articleContainer}>
+                                                    {questions.map(q => {
+                                                        const ids = q.article_ids;
+                                                        var as = []
+                                                        ids.forEach(id => {
+                                                            var a = articles.filter(a => a.id == id)[0];
+                                                            as.push(a);
+                                                            // TODO: sort them.
+                                                        })
 
-                                            <button id={styles.recommendButton} onClick={handleViewRecommendations}>
-                                                Recommend <img src={chevron} width={22} />
-                                            </button>
+                                                        return (
+                                                            <div className={styles.questionContainer}>
+                                                                <div className={styles.question}>{q.question}</div>
+                                                                {as.map(a => {
+                                                                    return (
+                                                                        <div className={styles.article}>
+                                                                            <button onClick={(e) => handleViewPrescribed(a)} className={styles.articleButton} id={a.id}>
+                                                                                <div className={styles.line}></div>
+                                                                                <div className={styles.articleHeading}>
+                                                                                    {/* Link + Title */}
+                                                                                    <div>
+                                                                                        <a href={a.link} target="_blank">{a.link}</a>
+                                                                                        <p className={styles.title} id={a.id}>{a.title}</p> 
+                                                                                    </div>
+                
+                                                                                    {/* Image */}
+                                                                                    <div className={styles.thumbnail} id={a.id}>
+                                                                                        <div className={styles.imageContainer}><img src={a.image} width={300} id={a.id}/></div>
+                                                                                    </div>
+                                                                                </div>
+                
+                                                                                {/* Text preview */}
+                                                                                <div className={styles.textPreview}>
+                                                                                    <p>{a.text}</p>
+                                                                                </div>
+                
+                                                                            </button>
+                                                                            <button className={styles.buttonAlt} id={styles.editButton} onClick={(e) => handleViewEdit(a.id)}>
+                                                                                Edit <img src={pencil} />
+                                                                            </button>
+                                                                        </div>        
+                                                                    )
+                                                                })}
+                                                            </div>
+                                                        )
+                                                    })}
+                                                    <button id={styles.recommendButton} onClick={handleViewRecommendations}>
+                                                        Recommend <img src={downChevron} width={22} />
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </>
                                         :
                                         <>
@@ -274,7 +349,7 @@ const SelectPatient = () => {
                                                     return (
                                                         // Need the extra outer div to position the edit button. too many divs :\
                                                         <div className={styles.article}>
-                                                            <button onClick={(e) => setViewPrescribe(true)} className={styles.articleButton} id={a.id}>
+                                                            <button onClick={(e) => handleViewPrescribed(a)} className={styles.articleButton} id={a.id}>
                                                                 <div className={styles.line}></div>
                                                                 <div className={styles.articleHeading}>
                                                                     {/* Link + Title */}

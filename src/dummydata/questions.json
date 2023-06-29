@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "article_ids": [3],
+        "question": "What tests will the pulmonary specialist run to diagnose asthma?"
+    },
+    {
+        "id": 2,
+        "article_ids": [1, 2],
+        "question": "Can you explain the difference between asthma and other respiratory conditions?"
+    },
+    {
+        "id": 3,
+        "article_ids": [4],
+        "question": "Are there any lifestyle changes I can make to help manage my breathing difficulties?"
+    }
+]
