@@ -30,9 +30,27 @@ const SelectPatient = () => {
     
     // Edit a particular resource
     const [article, setArticle] = useState(null); // article for resource
-    const [note, setNote] = useState(null) // note for patient
+    
+    const container = useRef(null);
+    const questionsRef = useRef(null);
 
-    const container = useRef(null)
+    // Functions for questions accordian in Recommendations section
+    const getMap = () => {
+        if (!questionsRef.current) {
+            questionsRef.current = new Map();
+        }
+        return questionsRef.current;
+    }
+
+
+    const expandQuestionId = (id) => {
+        const map = getMap();
+        const node = map.get(id);
+        if (node.className == `${styles.questionContainer}`) {
+            node.className = `${styles.questionContainer} ${styles.display}`
+        }
+        else node.className = `${styles.questionContainer}`
+    }
 
     const handleNameChange = (e) => {
         setName(e.target.value);
@@ -269,18 +287,17 @@ const SelectPatient = () => {
                                     </div>
 
                                     :
-
-                                    <div className={styles.middleCol}>
-                                        <h1>Select Prescription Material</h1>
                                         
-                                        {/* If want to show recommendations, replace all of this.*/}
-                                        {(viewRecommendations) ? 
-                                        <>
-                                            <div id={styles.border}></div>
+                                        (viewRecommendations) ? 
+                                        <div className={styles.middleCol} id={styles.middleColRecommendations}>
+                                        <div className={styles.header}><h1>Select Prescription Material</h1></div>
+
+                                        <button onClick={(e) => setViewRecommendations(false)} id={styles.profileBackButton}>
+                                            <img src={leftArrow} />Back
+                                        </button>
                                             <div id={styles.recommendationContainer}>
-                                                <button onClick={(e) => setViewRecommendations(false)} id={styles.profileBackButton}>
-                                                    <img src={leftArrow} />Back
-                                                </button>
+
+
                                                 {/* Articles container */}
                                                 <div className={styles.articleContainer}>
                                                     {questions.map(q => {
@@ -293,8 +310,23 @@ const SelectPatient = () => {
                                                         })
 
                                                         return (
-                                                            <div className={styles.questionContainer}>
-                                                                <div className={styles.question}>{q.question}</div>
+                                                            <>
+                                                            <button className={styles.question} onClick={(e) => expandQuestionId(q.id)}>
+                                                                {q.question}
+                                                                <img src={plus} />
+                                                            </button>
+
+                                                            <div className={styles.questionContainer}
+                                                                key={q.id}
+                                                                ref={(node) => {
+                                                                const map = getMap();
+                                                                if (node) {
+                                                                    map.set(q.id, node);
+                                                                } else {
+                                                                    map.delete(q.id);
+                                                                }
+                                                                }}
+                                                            >
                                                                 {as.map(a => {
                                                                     return (
                                                                         <div className={styles.article}>
@@ -325,7 +357,7 @@ const SelectPatient = () => {
                                                                         </div>        
                                                                     )
                                                                 })}
-                                                            </div>
+                                                            </div></>
                                                         )
                                                     })}
                                                     <button id={styles.recommendButton} onClick={handleViewRecommendations}>
@@ -333,9 +365,10 @@ const SelectPatient = () => {
                                                     </button>
                                                 </div>
                                             </div>
-                                        </>
+                                            </div>
                                         :
-                                        <>
+                                        <div className={styles.middleCol}>
+                                        <h1>Select Prescription Material</h1>
                                             <form onSubmit={(e) => submitSearch(e)}>
                                                 <input className={`${mainStyles.searchbar} ${styles.clearSearchbar}`} type="text" placeholder="Search"/>
                                             </form>
@@ -381,9 +414,7 @@ const SelectPatient = () => {
                                             <button id={styles.recommendButton} onClick={handleViewRecommendations}>
                                                 Recommend <img src={chevron} width={22} />
                                             </button>
-                                        </>}
-                                    </div>
-                                }
+                                        </div>}
                                 
 
 

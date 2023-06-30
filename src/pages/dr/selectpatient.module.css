@@ -414,38 +414,56 @@
 
   /* Recommendations panel */
   .questionContainer {
-    display: flex;
     flex-direction: column;
     gap: 20px;
     border-radius: 12px;
+    display: none;
+  }
+
+  /* Used for questionContainer –  to display articles for a particular question (accordian) */
+  .display {
+    display: flex;
   }
 
   .question {
     background: rgba(199, 205, 204, 0.26);
     text-align: left;
-    padding: 1rem 2rem;
+    width: 100%;
+    font-weight: normal;
+    padding: 1.2rem;
     border-radius: 12px;
     box-shadow: 1px 1px 1px rgba(199, 205, 204, 0.26);
+    display: flex;
+    align-items: center;
   }
 
-  #border {
-    height: 180%;
-    width: 100%;
-    left: 0;
-    top: 150px;
-    position: absolute;
-    border-radius: 12px;
+  .question:hover {
     background: rgba(199, 205, 204, 0.15);
-
   }
 
-  #recommendationContainer .articleContainer{
+  #recommendationContainer{
     position: relative;
-    margin-top: 100px;
+    background: rgba(199, 205, 204, 0.15);
+    padding: 1rem;
+    border-radius: 12px 0px 0 12px;
   }
 
   .articleContainer #recommendButton {
     position: absolute;
-    top: -25px;
+    top: 0px;
     height: fit-content;
+  }
+
+  #middleColRecommendations {
+    display: grid;
+    grid-template-rows: 120px 1fr;
+    gap: 20px;
+    padding: 0;
+  }
+
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
