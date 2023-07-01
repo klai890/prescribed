@@ -67,7 +67,37 @@ const Doctors = () => {
 
     // Search for doctor
     const submitSearch = (e) => {
-        // TODO: Search doctors.
+        e.preventDefault();
+        var searchTerm = e.target.elements['search'].value;
+        // Tokenize the search terms and remove empty spaces
+        var tokens = searchTerm
+                      .toLowerCase()
+                      .split(' ')
+                      .filter(function(token){
+                        return token.trim() !== '';
+                      });
+
+        console.log(tokens)
+
+        if(tokens.length) {
+            
+            //  Create a regular expression of all the search terms
+            var searchTermRegex = new RegExp(tokens.join('|'), 'gim');
+            console.log(searchTermRegex)
+            
+            var filteredList = doctorData.filter(function(a){
+              // Create a string of all object values
+              var str = '';
+              for (var key in a) {
+                if (a.hasOwnProperty(key) && a[key] !== '') {
+                  str += a[key].toString().toLowerCase().trim() + ' ';
+                }
+              }
+              // Return book objects where a match with the search regex if found
+              return str.match(searchTermRegex);
+            });
+            console.log(filteredList)
+        }
     }
 
 
@@ -91,7 +121,10 @@ const Doctors = () => {
                     <div class={styles.column}>
 
                         {/* Search Bar */}
-                        <form onSubmit={(e) => submitSearch(e)}><input className={styles.searchbar} type="text" placeholder="Search for your doctor..."/></form>
+                        <form onSubmit={(e) => submitSearch(e)} className={styles.searchForm}>
+                            <input className={styles.searchbar} name="search" type="text" placeholder="Search for your doctor..."/>
+                            <button type="submit" className={styles.searchButton}>Search</button>
+                        </form>
 
                         {/* Unread Articles */}
                         <div className={styles.articleContainer}>

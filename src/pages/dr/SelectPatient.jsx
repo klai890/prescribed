@@ -18,7 +18,6 @@ import questions from '../../dummydata/questions.json'
 const SelectPatient = () => {
 
     const [name, setName] = useState(null);
-    const [birthday, setBirthday] = useState(null);
     
     // Toggle Views
     const [initialView, setInitialView] = useState(true);
@@ -42,7 +41,6 @@ const SelectPatient = () => {
         return questionsRef.current;
     }
 
-
     const expandQuestionId = (id) => {
         const map = getMap();
         const node = map.get(id);
@@ -52,23 +50,18 @@ const SelectPatient = () => {
         else node.className = `${styles.questionContainer}`
     }
 
-    const handleNameChange = (e) => {
-        setName(e.target.value);
-    }
-
-    const handleBirthdayChange = (e) => {
-        setBirthday(e.target.value)
-    }
-
     const submitForm = (e) => {
         e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        const formJson = Object.fromEntries(formData.entries());
+        setName(formJson.name) // so it displays on the right panel
     
         // Connect to database
         
-        // Add search functionality
+        // Add DB search functionality
         console.log('Patient search form submitted');
-        console.log('Username:', name);
-        console.log('Birthday:', birthday);
+        console.log(formJson);
 
         // Backend: If such a user exists, set user to that user.
         // If not, create a user with the given credentials.
@@ -105,6 +98,7 @@ const SelectPatient = () => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
+        const formJson = Object.fromEntries(formData.entries());
 
         // ADD new data to view
         // POST new data
@@ -114,6 +108,7 @@ const SelectPatient = () => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
+        const formJson = Object.fromEntries(formData.entries());
 
         // ADD new data to view
         // POST new data
@@ -137,6 +132,7 @@ const SelectPatient = () => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
+        const formJson = Object.fromEntries(formData.entries());
 
         // ADD new data to view
         // POST new data
@@ -158,16 +154,14 @@ const SelectPatient = () => {
                                 <input
                                     type="text"
                                     id="name"
-                                    value={name}
+                                    name="name"
                                     placeholder="Name"
-                                    onChange={handleNameChange}
                                 />
                                 <input
                                     type="text"
                                     id="birthday"
-                                    value={birthday}
+                                    name="birthday"
                                     placeholder="Birthday"
-                                    onChange={handleBirthdayChange}
                                 />
                                 <button type="submit" className={styles.buttonAlt}>Confirm</button>
                             </form>

@@ -8,31 +8,21 @@ import logo from '../images/logo.svg'
 const Login = () => {
 
   const navigate = useNavigate();
-  const [username, setUsername] = useState('');
-  const [birthday, setBirthday] = useState('');
-  const [remember, setRemember] = useState(false);
-
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const handleBirthdayChange = (e) => {
-    setBirthday(e.target.value);
-  };
-
-  const handleRememberChange = (e) => {
-    setRemember(e.target.value);
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const formJson = Object.fromEntries(formData.entries());
+    const remember = formData.has('remember') ? true : false; // bc formData won't have property remember if it is not checked.
     
     // Connect to database.
     
     // Add login functionality
     console.log('Login form submitted');
-    console.log('Username:', username);
-    console.log('Birthday:', birthday);
+    console.log('Username:', formJson.username);
+    console.log('Birthday:', formJson.birthday);
+    console.log('Remember', remember)
 
     var loginSuccessful = true;
     if (loginSuccessful) {
@@ -54,37 +44,34 @@ const Login = () => {
               <div className={styles.loginContainer}>
                   <img src={logo} />
                   <form className={styles.loginForm} onSubmit={handleSubmit}>
-                    <div className={styles.formGroup}>
-                      <label htmlFor="username" className={styles.textLabel}>Full Name:</label>
-                      <input
-                        type="text"
-                        id="username"
-                        value={username}
-                        placeholder="Full Name"
-                        onChange={handleUsernameChange}
-                      />
-                    </div>
-                    <div className={styles.formGroup}>
-                      <label htmlFor="birthday" className={styles.textLabel}>Birthday:</label>
-                      <input
-                        type="text"
-                        id="birthday"
-                        value={birthday}
-                        placeholder="Birthday"
-                        onChange={handleBirthdayChange}
-                      />
-                    </div>
-                    <div className={styles.smallerInput}>
-                      <div><input 
-                        type="checkbox"
-                        id="remember"
-                        value={remember}
-                        onChange={handleRememberChange}
-                      /> <label htmlFor="remember">Remember me for 30 days</label></div>
-                    </div>
-                    <div className={styles.buttonContainer}>
+                      <div className={styles.formGroup}>
+                        <label htmlFor="username" className={styles.textLabel}>Full Name:</label>
+                        <input
+                          type="text"
+                          id="username"
+                          name="username"
+                          placeholder="Full Name"
+                        />
+                      </div>
+                      <div className={styles.formGroup}>
+                        <label htmlFor="birthday" className={styles.textLabel}>Birthday:</label>
+                        <input
+                          type="text"
+                          name="birthday"
+                          id="birthday"
+                          placeholder="Birthday"
+                        />
+                      </div>
+                      <div className={styles.smallerInput}>
+                        <div><input 
+                          type="checkbox"
+                          id="remember"
+                          name="remember"
+                          value="true"
+                        /> <label htmlFor="remember">Remember me for 30 days</label></div>
+                        
+                      </div>
                       <button type="submit">Login</button>
-                    </div>
                   </form>
               </div>
 

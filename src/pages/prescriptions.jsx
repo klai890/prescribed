@@ -1,7 +1,7 @@
 /**
- * prescriptions.jsx : Prescriptions panel
+ * prescriptions.jsx : Prescriptions panel (/prescriptions)
  * 
- * Shows doctors and recommended articles.
+ * Shows unread and read articles and displays article previews.
  */
 
 import React, {useState} from 'react'
@@ -50,7 +50,9 @@ const Prescriptions = () => {
             setArticleId(article_id)
         }
 
-        // Change from unread to read – must be accompanied by a POST request as well.
+        // Change from unread to read – must be accompanied by a POST request as well... 
+        // Just how are we going to keep track of unread / read in the database for each patient?
+
         if (article && article.unread == true) {
             article.unread = false;        
             console.log(articles.filter (article => article.unread));
@@ -72,6 +74,37 @@ const Prescriptions = () => {
     }
 
     const submitSearch = (e) => {
+        e.preventDefault();
+        var searchTerm = e.target.elements['search'].value;
+        // Tokenize the search terms and remove empty spaces
+        var tokens = searchTerm
+                      .toLowerCase()
+                      .split(' ')
+                      .filter(function(token){
+                        return token.trim() !== '';
+                      });
+
+        console.log(tokens)
+
+        if(tokens.length) {
+            
+            //  Create a regular expression of all the search terms
+            var searchTermRegex = new RegExp(tokens.join('|'), 'gim');
+            console.log(searchTermRegex)
+            
+            var filteredList = articles.filter(function(a){
+              // Create a string of all object values
+              var str = '';
+              for (var key in a) {
+                if (a.hasOwnProperty(key) && a[key] !== '') {
+                  str += a[key].toString().toLowerCase().trim() + ' ';
+                }
+              }
+              // Return book objects where a match with the search regex if found
+              return str.match(searchTermRegex);
+            });
+            console.log(filteredList)
+        }
         
     }
     
@@ -97,7 +130,10 @@ const Prescriptions = () => {
                     <div class={styles.column}>
 
                         {/* Search Bar */}
-                        <form onSubmit={(e) => submitSearch(e)}><input className={styles.searchbar} type="text" placeholder="Search for your prescription..."/></form>
+                        <form onSubmit={(e) => submitSearch(e)} className={styles.searchForm}>
+                            <input className={styles.searchbar} name="search" type="text" placeholder="Search for your prescription..."/>
+                            <button type="submit" className={styles.searchButton}>Search</button>
+                        </form>
 
                         {/* Unread Articles */}
                         <div className={styles.articleContainer}>
@@ -162,8 +198,8 @@ const Prescriptions = () => {
                             <img src={resourceIcon} />
                             <h1 className={styles.resourceHeader}>Resource Name</h1>
                             <p>{info}</p>
-                            <button className={styles.resourceButton} onClick={(e) => toggleArticlePanel()}>
-                                View Full Resource <img src={external}></img>
+                            <button className={styles.resourceButton}> {/* onClick={(e) => toggleArticlePanel()}> */}
+                                <a href={link} target="_blank">View Full Resource <img src={external}></img></a>
                             </button>
                         </div>
                     </>

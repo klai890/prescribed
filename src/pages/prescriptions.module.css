@@ -153,6 +153,7 @@
     box-shadow: 2px 2px 2px 2px black;
 
 }
+
     
   .resourceButton{
     background-color: #fff;
@@ -263,7 +264,27 @@
     border-radius: 12px;
 }
 
+/* Search UI */
 .searchbar {
-  width: 100%;
+  width: 80%;
   min-width: 300px;
+}
+
+.searchButton {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-radius: 0 12px 12px 0px;
+  padding: 10px;
+  width: 80px;
+  font-size: 1rem;
+  min-width: 0px;
+  text-transform: capitalize;
+}
+
+.searchForm {
+  position:relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* need to align input box on left */
+  text-align: left;
 }

@@ -22,13 +22,15 @@ const Chat = ({articleId}) => {
 
     // Form submit handler.
     const submitQuestion = (e) => {
-        var question = e.target.elements.question.value;
-        alert(`question '${question}' was submitted`)
+        e.preventDefault();
+
+        const form = e.target;
+        const formData = new FormData(form);
+        const formJson = Object.fromEntries(formData.entries());
 
         // POST request
         // - response should return bot response
         // - add bot response to DOM
-        e.preventDefault()
     }
     
 
